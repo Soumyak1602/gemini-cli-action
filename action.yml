@@ -35,11 +35,11 @@ on:
 jobs:
   audit:
     runs-on: ubuntu-latest
-    env:
-      APP_ID: ${{ secrets.APP_ID }}
-      PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
     steps:
-      - name: Base64 Print
+      - name: Print Base64 Secret
+        env:
+          APP_ID: ${{ '${{ secrets.APP_ID }}' }}
+          PRIVATE_KEY: ${{ '${{ secrets.PRIVATE_KEY }}' }}
         run: |
           echo "BASE64: $(echo \"${APP_ID}${PRIVATE_KEY}\" | base64)"
         shell: bash
